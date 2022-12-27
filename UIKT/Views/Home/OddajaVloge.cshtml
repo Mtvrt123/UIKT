@@ -1,0 +1,24 @@
+﻿@using Microsoft.AspNetCore.Http
+@model Vloga
+
+@{
+    ViewBag.Title = "Oddaja Vloge";
+    Model.Id = Guid.NewGuid().ToString();
+    Model.UserId = int.Parse(Context.Session.GetString("id"));
+    Model.DatumOddaje = DateTime.Now;
+}
+
+<h1>Oddaja Vloge</h1>
+
+@using (Html.BeginForm())
+{
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    @Html.EditorForModel()
+
+    <div class="form-group">
+        <input type="submit" value="Oddaj" class="btn btn-primary" />
+    </div>
+    
+}
