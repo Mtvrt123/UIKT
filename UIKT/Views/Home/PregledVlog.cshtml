@@ -1,0 +1,50 @@
+﻿@using Microsoft.AspNetCore.Http
+@model List<Vloga>
+@{
+    ViewBag.Title = "Pregled Vlog";
+    
+    List<Vloga> vloge = Model;
+}
+
+<h1>Pregled Vlog</h1>
+
+<table class="table">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Id</th>
+      <th scope="col">Datum oddaje</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+        @foreach (var vloga in vloge)
+        {
+            <tr>
+                <td>@(vloge.IndexOf(vloga) + 1)</td>
+                <td scope="row">@vloga.Id</td>
+                <td>@vloga.DatumOddaje</td>
+                <td>
+                    @{
+                        if (vloga.Status == StatusVloge.Oddana)
+                        {
+                            <span class="badge bg-primary">Oddana</span>
+                        }
+                        else if (vloga.Status == StatusVloge.Potrjena)
+                        {
+                            <span class="badge bg-success">Potrjena</span>
+                        }
+                        else if (vloga.Status == StatusVloge.Zavrnjena)
+                        {
+                            <span class="badge bg-danger">Zavrnjena</span>
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+    
+    
+    
+    

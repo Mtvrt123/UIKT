@@ -3,6 +3,18 @@ using System.ComponentModel.DataAnnotations;
 
 namespace UIKT.Models
 {
+    public enum StatusVloge
+    {
+        [Display(Name = "Oddana")]
+        Oddana,
+        [Display(Name = "V obravnavi")]
+        V_obravnavi,
+        [Display(Name = "Zavrnjena")]
+        Zavrnjena,
+        [Display(Name = "Potrjena")]
+        Potrjena
+    }
+
     public class Vloga
     {
         [Key]
@@ -13,6 +25,9 @@ namespace UIKT.Models
         
         [HiddenInput(DisplayValue = false)]
         public DateTime DatumOddaje { get; set; }
+
+        [HiddenInput(DisplayValue = false)]
+        public StatusVloge Status { get; set; }
 
         public string Ime { get; set; }
         public string Priimek { get; set; }
