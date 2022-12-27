@@ -30,7 +30,7 @@ namespace UIKT.Controllers
         {
             if (ModelState.IsValid)
             {
-                Logic.WriteFile(vloga);
+                Logic.AddVloga(vloga);
                 return RedirectToAction("Index");
             }
             else
@@ -42,10 +42,43 @@ namespace UIKT.Controllers
         [HttpGet]
         public IActionResult PregledVlog()
         {
-            List<Vloga> vloge = Logic.ReadFileForUser(int.Parse(HttpContext.Session.GetString("id")));
+            if (HttpContext.Session.GetString("role") == "admin")
+            {
+                return View(Logic.GetAll());
+            }
+            else
+            {
+                List<Vloga> vloge = Logic.GetVlogeByUserId(int.Parse(HttpContext.Session.GetString("id")));
+
+                return View(vloge);
+            }
+        }
+
+        [HttpGet]
+        public IActionResult PregledVloge(string id)
+        {
+            Vloga vloge = Logic.GetVlogaById(id);
 
             return View(vloge);
         }
+
+        [HttpPost]
+        public IActionResult Potrdi(string id)
+        {
+            Logic.UpdateVloga(id, true);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult Zavrni(string id)
+        {
+            Logic.UpdateVloga(id, false);
+
+            return RedirectToAction("Index");
+        }
+
+
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

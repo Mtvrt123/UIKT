@@ -1,0 +1,19 @@
+﻿@using Microsoft.AspNetCore.Http
+@model Vloga
+
+@{
+    
+    ViewBag.Title = "Pregled Vloge";
+}
+
+<h1>Pregled Vloge</h1>
+
+@Html.DisplayForModel()
+
+@using (Html.BeginForm())
+{
+    <div>
+        <button asp-action="Potrdi" asp-route-id="@Model.Id" type="submit" class="btn btn-success">Potrdi</button>
+        <button asp-action="Zavrni" asp-route-id="@Model.Id" type="submit" class="btn btn-danger">Zavrni</button>
+    </div>
+}

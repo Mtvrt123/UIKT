@@ -38,7 +38,7 @@ namespace UIKT
 
         }
 
-        public static void WriteFile(Vloga vloga)
+        public static void AddVloga(Vloga vloga)
         {
             CreteFile();
 
@@ -85,7 +85,12 @@ namespace UIKT
 
         }
 
-        public static List<Vloga> ReadFileForUser(int Id)
+        public static List<Vloga> GetAll()
+        {
+            return ReadFile();
+        }
+
+        public static List<Vloga> GetVlogeByUserId(int Id)
         {
 
             List<Vloga> vloge = ReadFile();
@@ -94,5 +99,53 @@ namespace UIKT
 
         }
 
+        public static Vloga GetVlogaById(string Id)
+        {
+
+            List<Vloga> vloge = ReadFile();
+
+            return vloge.Where(v => v.Id == Id).FirstOrDefault();
+
+        }
+
+        private static void UpdateVloge(List<Vloga> vlogas)
+        {
+            if (File.Exists(Path.Combine(docPath, folder, file)))
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(List<Vloga>));
+                XmlWriterSettings settings = new XmlWriterSettings
+                {
+                    Indent = true,
+                    OmitXmlDeclaration = false
+                };
+
+                using (XmlWriter xmlWriter = XmlWriter.Create(Path.Combine(docPath, folder, file), settings))
+                {
+                    xmlWriter.WriteStartDocument();
+                    serializer.Serialize(xmlWriter, vlogas);
+                }
+            }
+        }
+
+
+        
+        internal static void UpdateVloga(string id, bool status)
+        {
+            List<Vloga> vlogas = GetAll();
+
+            Vloga vloga = vlogas.Where(x => x.Id == id).FirstOrDefault();
+
+            if (status == true)
+            {
+                vloga.Status = StatusVloge.Potrjena;
+            }
+            else
+            {
+                vloga.Status = StatusVloge.Zavrnjena;
+            }
+
+            UpdateVloge(vlogas);
+
+        }
     }
 }

@@ -15,6 +15,12 @@
       <th scope="col">Id</th>
       <th scope="col">Datum oddaje</th>
       <th scope="col">Status</th>
+      @{
+            if (Context.Session.GetString("role") == "admin")
+            {
+                <th scope="col"></th>
+            }
+        }
     </tr>
   </thead>
   <tbody>
@@ -39,6 +45,14 @@
                             <span class="badge bg-danger">Zavrnjena</span>
                         }
                     }
+                </td>
+                <td>
+                    @{
+                        if (Context.Session.GetString("role") == "admin")
+                        {
+                            <a asp-action="PregledVloge" asp-route-id="@vloga.Id" class="btn btn-primary">Preglej</a>
+                        }
+                     }   
                 </td>
             </tr>
         }
