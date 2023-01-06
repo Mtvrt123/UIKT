@@ -7,33 +7,13 @@
 }
 
 <h1>Pregled Vloge</h1>
-@{
-    if (Context.Session.GetString("role") == "admin")
-    {
-        <h5>
-            Maksimalna skupna površina:
-            <br />
-            @TempData["skupna_pov_max"]
-        </h5>
-        <h5>
-            Skupna površina vlog:
-            <br />
-            @TempData["skupna_pov"]
-        </h5>        
-    }
-}
 
 @Html.DisplayForModel()
 
-@{
-    if (Context.Session.GetString("role") == "admin")
-    {
-        @using (Html.BeginForm())
-        {
-            <div>
-                <button asp-action="Potrdi" asp-route-id="@Model.Id" type="submit" class="btn btn-success">Potrdi</button>
-                <button asp-action="Zavrni" asp-route-id="@Model.Id" type="submit" class="btn btn-danger">Zavrni</button>
-            </div>
-        }
-    }
+@using (Html.BeginForm())
+{
+    <div>
+        <button asp-action="Potrdi" asp-route-id="@Model.Id" type="submit" class="btn btn-success">Potrdi</button>
+        <button asp-action="Zavrni" asp-route-id="@Model.Id" type="submit" class="btn btn-danger">Zavrni</button>
+    </div>
 }
