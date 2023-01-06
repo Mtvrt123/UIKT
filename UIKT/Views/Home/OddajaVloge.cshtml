@@ -6,7 +6,7 @@
     Model.Id = Guid.NewGuid().ToString();
     Model.UserId = int.Parse(Context.Session.GetString("id"));
     Model.DatumOddaje = DateTime.Now;
-    Model.Status = StatusVloge.Oddana;
+    Model.Status = StatusVloge.V_pripravi;
 }
 
 <h1>Oddaja Vloge</h1>

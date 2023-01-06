@@ -57,6 +57,9 @@ namespace UIKT.Controllers
         [HttpGet]
         public IActionResult PregledVloge(string id)
         {
+            TempData["skupna_pov"] = Logic.GetSkupnaPovrsina();
+            TempData["skupna_pov_max"] = 15000;
+
             Vloga vloge = Logic.GetVlogaById(id);
 
             return View(vloge);
@@ -78,8 +81,40 @@ namespace UIKT.Controllers
             return RedirectToAction("Index");
         }
 
+        //[HttpPost]
+        public IActionResult SpremembaLokacije(string id)
+        {
+
+            Vloga vloge = Logic.GetVlogaById(id);
+
+            return View(vloge);
+        }
+        
+        
+        [HttpPost]
+        public IActionResult SpremembaLokacije(Vloga vloga)
+        {
+
+            Logic.SpremembaLokacije(vloga);
+
+            return RedirectToAction("Index");
+
+        }
 
 
+        //[HttpPost]
+        public IActionResult KoncnaOddaja(string id)
+        {
+            Logic.KoncnaOddaja(id);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult Privacy()
+        {
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
