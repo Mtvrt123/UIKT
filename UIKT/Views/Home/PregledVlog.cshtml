@@ -15,12 +15,14 @@
       <th scope="col">Id</th>
       <th scope="col">Datum oddaje</th>
       <th scope="col">Status</th>
-      @{
-            if (Context.Session.GetString("role") == "admin")
-            {
-                <th scope="col"></th>
+      <th scope="col"></th> 
+            @{
+                if (Context.Session.GetString("role") == "user")
+                {
+                     <th scope="col"></th> 
+                     <th scope="col"></th> 
+                }
             }
-        }
     </tr>
   </thead>
   <tbody>
@@ -36,6 +38,10 @@
                         {
                             <span class="badge bg-primary">Oddana</span>
                         }
+                        if (vloga.Status == StatusVloge.V_pripravi)
+                        {
+                            <span class="badge bg-warning">V pripravi</span>
+                        }
                         else if (vloga.Status == StatusVloge.Potrjena)
                         {
                             <span class="badge bg-success">Potrjena</span>
@@ -50,11 +56,37 @@
                     @{
                         if (Context.Session.GetString("role") == "admin")
                         {
-                            <a asp-action="PregledVloge" asp-route-id="@vloga.Id" class="btn btn-primary">Preglej</a>
+                            if (vloga.Status == StatusVloge.Oddana)
+                            {
+                                <a asp-action="PregledVloge" asp-route-id="@vloga.Id" class="btn btn-primary">Preglej</a>
+                            }
                         }
-                     }   
+                        else
+                        {
+                            <a asp-action="PregledVloge" asp-route-id="@vloga.Id" class="btn btn-primary">I</a>
+                        }
+                    }
                 </td>
-            </tr>
+                    @{
+                    if (Context.Session.GetString("role") == "user")
+                    {
+                        if (vloga.Status == StatusVloge.V_pripravi)
+                        {
+                            <td>
+                                <a asp-action="SpremembaLokacije" asp-route-id="@vloga.Id" class="btn btn-primary">Sprememba lokacije</a>
+                            </td>
+                            <td>
+                                <a asp-action="KoncnaOddaja" asp-route-id="@vloga.Id" class="btn btn-primary">Oddaj končno</a>
+                            </td>
+                        }
+                        else
+                        {
+                                <td></td>
+                                <td></td>
+                        }
+                    }
+                }
+                </tr>
         }
     </tbody>
 </table>

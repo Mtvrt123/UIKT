@@ -18,6 +18,17 @@ namespace UIKT
                 options.Cookie.IsEssential = true;
             });
 
+            builder.Services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential 
+                // cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+
+                options.MinimumSameSitePolicy = SameSiteMode.None; // SameSiteMode.Strict;
+
+                options.ConsentCookieValue = "false";
+            });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -30,6 +41,7 @@ namespace UIKT
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseCookiePolicy();
 
             app.UseRouting();
 

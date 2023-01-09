@@ -7,8 +7,8 @@ namespace UIKT.Models
     {
         [Display(Name = "Oddana")]
         Oddana,
-        [Display(Name = "V obravnavi")]
-        V_obravnavi,
+        [Display(Name = "V pripravi")]
+        V_pripravi,
         [Display(Name = "Zavrnjena")]
         Zavrnjena,
         [Display(Name = "Potrjena")]
@@ -35,19 +35,23 @@ namespace UIKT.Models
        
         public string Telefon { get; set; }
 
+        [Display(Name = "Občina")]
         public string Obcina { get; set; }
         public string Naslov { get; set; }
         public string Posta { get; set; }
+        [Display(Name = "Poštna Številka")]
         public string PostnaSt { get; set; }
-
+        [Display(Name = "Površina")]
         public double Poversina { get; set; }
-        
+        [Display(Name = "Naslov Vinograda")]
         public string NaslovVinograda { get; set; }
+        [Display(Name = "Pošta Vinograda")]
         public string PostaVinograda { get; set; }
+        [Display(Name = "Poštna Številka Vinograda")]
         public string PostnaStVinograda { get; set; }
-        
+        [Display(Name = "Vrsta vinske trte")]
         public string VrstaVinskeTrte { get; set; }
-
+        [Display(Name = "Terase?")]
         public bool Terase { get; set; }
 
         public Vloga(int userId, string ime, string priimek, string davcna, string telefon, string obcina, string naslov, string posta, string postnaSt, double poversina, string naslovVinograda, string postaVinograda, string postnaStVinograda, string vrstaVinskeTrte, bool terase)

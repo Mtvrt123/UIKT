@@ -147,5 +147,45 @@ namespace UIKT
             UpdateVloge(vlogas);
 
         }
+
+        internal static object? GetSkupnaPovrsina()
+        {
+            int skupnaPovrsina = 0;
+
+            List<Vloga> vloge = GetAll();
+
+            foreach (var vloga in vloge)
+            {
+                skupnaPovrsina +=  (int)vloga.Poversina;
+            }
+
+            return skupnaPovrsina;
+        }
+
+        internal static void KoncnaOddaja(string id)
+        {
+            List<Vloga> vlogas = GetAll();
+
+            Vloga vloga = vlogas.Where(x => x.Id == id).FirstOrDefault();
+
+            vloga.Status = StatusVloge.Oddana;
+
+            UpdateVloge(vlogas);
+        }
+
+        internal static void SpremembaLokacije(Vloga vloga)
+        {
+            List<Vloga> vlogas = GetAll();
+
+            Vloga vlogaUpdate = vlogas.Where(x => x.Id == vloga.Id).FirstOrDefault();
+
+            vlogaUpdate.Poversina = vloga.Poversina;
+            vlogaUpdate.NaslovVinograda = vloga.NaslovVinograda;
+            vlogaUpdate.PostaVinograda = vloga.PostaVinograda;
+            vlogaUpdate.PostnaStVinograda = vloga.PostnaStVinograda;
+            vlogaUpdate.Terase = vloga.Terase;
+
+            UpdateVloge(vlogas);
+        }
     }
 }
