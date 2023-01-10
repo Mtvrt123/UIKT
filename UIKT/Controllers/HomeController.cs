@@ -101,6 +101,8 @@ namespace UIKT.Controllers
 
         }
 
+        
+
 
         //[HttpPost]
         public IActionResult KoncnaOddaja(string id)
@@ -112,6 +114,12 @@ namespace UIKT.Controllers
 
         [HttpGet]
         public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Cookie()
         {
             return View();
         }

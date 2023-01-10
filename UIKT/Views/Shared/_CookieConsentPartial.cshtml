@@ -10,10 +10,16 @@
 {
     <div id="cookieConsent" class="alert alert-info alert-dismissible fade show" role="alert">
         <p>
-            Use this space to summarize your privacy and cookie use policy. <a asp-action="Privacy">Learn More</a>.
+            The privacy policy. <a asp-action="Privacy">Learn More</a>.
+        </p>
+        <p>
+            The cookie policy. <a asp-action="Cookie">Learn More</a>.
         </p>
         <button type="button" class="accept-policy close btn btn-info" data-dismiss="alert" aria-label="Close" data-cookie-string="@cookieString">
             <span aria-hidden="true">Accept</span>
+        </button>
+        <button type="button" class="reject-policy close btn btn-danger" data-dismiss="alert" aria-label="Close" data-cookie-string="@cookieString">
+            <span aria-hidden="true">Reject</span>
         </button>
     </div>
     <script>
@@ -21,9 +27,19 @@
             var button = document.querySelector("#cookieConsent button[data-cookie-string]");
             button.addEventListener("click", function (event) {
                 document.cookie = button.dataset.cookieString;
+                console.log(document.cookie);
                 var cookieContainer = document.querySelector("#cookieConsent");
                 cookieContainer.remove();
             }, false);
+
+            var rejectButton = document.querySelector("#cookieConsent button.reject-policy");
+            rejectButton.addEventListener("click", function (event) {
+                document.cookie = button.dataset.cookieString;
+                console.log(document.cookie);
+                var cookieContainer = document.querySelector("#cookieConsent");
+                cookieContainer.remove();
+            }, false);
+            
         })();
     </script>
 }
