@@ -3,11 +3,14 @@
 ## Project DZZVT
 
 Spletna aplikacija, ki omogoča uporabniku oddati vlogo za pridobitev dovoljenja za zasaditev vinske trte.
+
 ## Programsko okolje
 
-* .NET / .NET 7
+* C# - .NET / .NET 7
 * Bootstrap
 * JavaScript
+* CSS
+* HTML
 
 ## Lastnosti
 
