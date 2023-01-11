@@ -9,12 +9,18 @@
 @if (showBanner)
 {
     <div id="cookieConsent" class="alert alert-info alert-dismissible fade show" role="alert">
-        <p>
-            The privacy policy. <a asp-action="Privacy">Learn More</a>.
-        </p>
-        <p>
-            The cookie policy. <a asp-action="Cookie">Learn More</a>.
-        </p>
+        <div>
+            <strong>Cookie Consent and privacy policy</strong>
+            <p>
+                This website uses cookies to ensure you get the best experience on our website. By accepting you consent to the use of cookies and the privacy policy.
+            </p>
+            <p>
+                The cookie policy. <a asp-action="Cookie">Learn More</a>.
+            </p>
+            <p>
+                The privacy policy. <a asp-action="Privacy">Learn More</a>.
+            </p>
+        </div>
         <button type="button" class="accept-policy close btn btn-info" data-dismiss="alert" aria-label="Close" data-cookie-string="@cookieString">
             <span aria-hidden="true">Accept</span>
         </button>
